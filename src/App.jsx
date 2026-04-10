@@ -1,46 +1,28 @@
-import { useEffect, useState } from "react";
-import MovieCard from "./components/MovieCard.jsx";
-import "./style/global.css";   // global.css 를 불러오고 싶다
+import "./style/global.css"; // global.css 를 불러오고 싶다. from이 안붙음
+import { BrowserRouter, Route, Routes } from "react-router";
+import Home from "./routes/Home.jsx";
+import Detail from "./routes/Detail.jsx";
 
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-// express에서는 process.env.환경변수KEY
-// VITE를 사용하는 React에서는 import.meta.env.환경변수KEY
 
 
 function App() {
-    const [loading, setLoading] = useState(true); // 불러올 때의 loading 상태를 관리함 state
-    const [movies, setMovies] = useState([]); // 불러올 무비 목록을 저장할 state
-
-    useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=ko-KR&page=1`)
-            .then(res => res.json())
-            .then(json => {
-                setMovies(json.results);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.log("데이터 수신 오류", error);
-            });
-    }, []);
-
     return (
-        <div>
-            {loading ? (
-                <h1>loading...</h1>
-            ) : (
-                <div>
-                    {movies.map(value => (
-                        <MovieCard
-                            key={value.id}
-                            poster={value.poster_path}
-                            title={value.title}
-                            overview={value.overview}
-                            vote_average={value.vote_average}
-                        />
-                    ))}
-                </div>
-            )}
-        </div>
+        <BrowserRouter>
+            {/*
+                BrowserRouter 로 감싸주어서, URL이 변경됨을 감지하여
+                페이지 이동 처리를 할 수 있도록 함.
+                => BrowserRouter가 감싸지지 않은 컴포넌트는 안 바뀐다.
+            */}
+            <Routes>
+                {/*
+                    Route는 2가지 속성을 가짐
+                    path 속성 : 이 분기에 해당하는 URL(경로)로 들어오면
+                    element 속성 : 넣어준 값의 컴포넌트를 화면에 렌더링해줘
+                */}
+                <Route path={"/"} element={<Home />} />
+                <Route path={"/:id"} element={<Detail />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

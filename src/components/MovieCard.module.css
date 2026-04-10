@@ -1,0 +1,50 @@
+
+.movie {
+    display: flex;
+    align-items: flex-start;
+    width: 47%;
+    background-color: white;
+    margin-bottom: 70px;
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 12px;
+    transition: all 0.3s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.movie:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.poster {
+    position: relative;
+    top: -40px;
+    width: 140px;
+    height: 210px;
+    border-radius: 8px;
+    margin-right: 25px;
+}
+
+.movie-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-title {
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.movie-vote-average {
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #888;
+}
+
+.movie-overview {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
