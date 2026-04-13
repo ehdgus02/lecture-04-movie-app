@@ -13,7 +13,7 @@ function Home() {
         fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=ko-KR&page=1`)
             .then(res => res.json())
             .then(json => {
-                setMovies(json.results);
+                setMovies(json.results);  // => 데이터를 받아온 이후에 array로 될 것임
                 setLoading(false);
             })
             .catch(error => {
